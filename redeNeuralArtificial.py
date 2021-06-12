@@ -3,6 +3,7 @@ import warnings as wr
 from sklearn import neural_network as nn
 from sklearn.exceptions import ConvergenceWarning
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import confusion_matrix
 import pandas as pd
 
 
@@ -50,12 +51,15 @@ with wr.catch_warnings():
 
 # teste
 print('Testes') 
-Y = mlp.predict(X_teste)
+Y_predict = mlp.predict(X_teste)
 
 # resultado 
 print('Resultado procurado') 
 print(Y_train)
 print("Score de treino: %f" % mlp.score(X_train, Y_train))
 print('Resultado encontrado') 
-print(Y)
+print(Y_predict)
 print("Score do teste: %f" % mlp.score(X_teste, Y_teste))
+
+print("Matriz de confusão:") 
+print(confusion_matrix(Y_teste, Y_predict))
